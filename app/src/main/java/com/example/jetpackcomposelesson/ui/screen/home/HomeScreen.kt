@@ -48,20 +48,46 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel()){
                 },
             )
         }
+    ){ it
+        Section()
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Section(){
+    val manager = LocalThemeManager.current
+
+    Column(
+        modifier = Modifier.fillMaxSize().padding(all = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(space = 10.dp, alignment = Alignment.CenterVertically),
+        horizontalAlignment = Alignment.Start
     ) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+        /// Title
+        Text("Featured", style = MaterialTheme.typography.titleLarge)
+
+        /// Boxes
+        Row(modifier = Modifier.fillMaxWidth().height(120.dp)
         ) {
-            Box(
-                modifier = Modifier
-                    .size(size = 100.dp)
-                    .background(color = state.boxColor)
-                    .clickable {
-                    viewModel.changeColor()
-                },
+            Box(modifier = Modifier
+                .weight(1f)
+                .fillMaxHeight()
+                .background(color = MaterialTheme.baseColorTheme.primaryColor, shape = RoundedCornerShape(16.dp))
             )
+            Spacer(modifier = Modifier.width(16.dp))
+            Box(modifier = Modifier
+                .weight(1f)
+                .fillMaxHeight()
+                .background(color = MaterialTheme.baseColorTheme.secondaryColor, shape = RoundedCornerShape(16.dp)))
+
         }
+
+        Switch(
+            modifier = Modifier.fillMaxWidth(),
+            checked = manager.isDarkTheme,
+            onCheckedChange = {
+                manager.changeTheme()
+            }
+        )
     }
 }
