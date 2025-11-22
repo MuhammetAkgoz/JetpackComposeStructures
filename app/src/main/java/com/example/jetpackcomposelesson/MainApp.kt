@@ -1,12 +1,13 @@
 package com.example.jetpackcomposelesson
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import com.example.jetpackcomposelesson.navigation.NavGraph
 
 
 @Composable
-fun MainApp(){
+fun MainApp(modifier: Modifier = Modifier,){
     val navController = rememberNavController()
-    NavGraph(navController = navController)
+    NavGraph(modifier = modifier, navController = navController)
 }

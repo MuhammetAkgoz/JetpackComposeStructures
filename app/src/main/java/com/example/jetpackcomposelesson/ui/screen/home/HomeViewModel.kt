@@ -13,12 +13,12 @@ class HomeViewModel : ViewModel() {
     val state: StateFlow<HomeState> = _stateFlow
 
     fun changeColor(){
-        val random = Random.Default // Veya kotlin.random.Random
+        val random = Random.Default
         val randomColor = Color(
-            red = random.nextInt(256),   // 0-255 arası
-            green = random.nextInt(256), // 0-255 arası
-            blue = random.nextInt(256),  // 0-255 arası
-            alpha = 255                  // Tamamen opak (görünür)
+            red = random.nextInt(256),
+            green = random.nextInt(256),
+            blue = random.nextInt(256),
+            alpha = 255
         )
 
         _stateFlow.update { state ->
