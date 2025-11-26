@@ -45,10 +45,6 @@ fun HomeScreen(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
-    LaunchedEffect(title) {
-        viewModel.setTitle(title)
-    }
-
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -66,8 +62,8 @@ fun HomeScreen(
             )
         }
     ) {
-        it
-        Section(onNavigateToProfile, title = state.title)
+
+        Section(onNavigateToProfile, title = title)
     }
 }
 

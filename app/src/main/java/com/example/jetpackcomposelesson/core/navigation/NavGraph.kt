@@ -1,7 +1,6 @@
 package com.example.jetpackcomposelesson.core.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -10,10 +9,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.example.jetpackcomposelesson.core.common.NavigationResult
+import com.example.jetpackcomposelesson.core.common.observeResult
 import com.example.jetpackcomposelesson.core.common.popBackStackWithResult
 import com.example.jetpackcomposelesson.feature.ui.screen.home.HomeScreen
 import com.example.jetpackcomposelesson.feature.ui.screen.profile.ProfileScreen
-import kotlinx.coroutines.flow.mapNotNull
 
 @Composable
 fun NavGraph(
@@ -27,9 +26,7 @@ fun NavGraph(
         startDestination = startDestination
     ) {
         composable<HomeRoute> { backStackEntry ->
-            val result by navController.currentBackStackEntryFlow
-                .mapNotNull { it.savedStateHandle.get<String>(NavigationResult.PROFILE) }
-                .collectAsState(initial = null)
+            val result by backStackEntry.observeResult<String>(NavigationResult.PROFILE)
 
             HomeScreen(
                 title = result,
