@@ -8,9 +8,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
-import com.example.jetpackcomposelesson.ui.theme.JetpackComposeLessonTheme
-import com.example.jetpackcomposelesson.ui.theme.LocalThemeManager
-import com.example.jetpackcomposelesson.ui.theme.rememberThemeManager
+import com.example.jetpackcomposelesson.feature.ui.theme.JetpackComposeLessonTheme
+import com.example.jetpackcomposelesson.feature.ui.theme.LocalThemeManager
+import com.example.jetpackcomposelesson.feature.ui.theme.rememberThemeManager
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

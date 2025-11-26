@@ -1,6 +1,7 @@
-package com.example.jetpackcomposelesson.ui.screen.home
+package com.example.jetpackcomposelesson.feature.ui.screen.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,21 +25,29 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.jetpackcomposelesson.ui.theme.LocalThemeManager
-import com.example.jetpackcomposelesson.ui.theme.color.baseColorTheme
+import com.example.jetpackcomposelesson.feature.ui.theme.LocalThemeManager
+import com.example.jetpackcomposelesson.feature.ui.theme.color.baseColorTheme
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(viewModel: HomeViewModel = viewModel()){
-    val state by viewModel.state.collectAsState()
+fun HomeScreen(
+    viewModel: HomeViewModel = viewModel(),
+    onNavigateToProfile: () -> Unit,
+    title: String?,
+) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+
+    LaunchedEffect(title) {
+        viewModel.setTitle(title)
+    }
 
     Scaffold(
         topBar = {
@@ -56,37 +65,59 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel()){
                 },
             )
         }
-    ){ it
-        Section()
+    ) {
+        it
+        Section(onNavigateToProfile, title = state.title)
     }
 }
 
-@Preview(showBackground = true)
 @Composable
-fun Section(){
+fun Section(onNavigateToProfile: () -> Unit, title: String?) {
     val manager = LocalThemeManager.current
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(all = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(space = 10.dp, alignment = Alignment.CenterVertically),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(all = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(
+            space = 10.dp,
+            alignment = Alignment.CenterVertically
+        ),
         horizontalAlignment = Alignment.Start
     ) {
         /// Title
-        Text("Featured", style = MaterialTheme.typography.titleLarge)
+        Text(
+            modifier = Modifier.clickable {
+                onNavigateToProfile()
+            },
+            text = title ?: "Feature", style = MaterialTheme.typography.titleLarge
+        )
 
         /// Boxes
-        Row(modifier = Modifier.fillMaxWidth().height(120.dp)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(120.dp)
         ) {
-            Box(modifier = Modifier
-                .weight(1f)
-                .fillMaxHeight()
-                .background(color = MaterialTheme.baseColorTheme.primaryColor, shape = RoundedCornerShape(16.dp))
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+                    .background(
+                        color = MaterialTheme.baseColorTheme.primaryColor,
+                        shape = RoundedCornerShape(16.dp)
+                    )
             )
             Spacer(modifier = Modifier.width(16.dp))
-            Box(modifier = Modifier
-                .weight(1f)
-                .fillMaxHeight()
-                .background(color = MaterialTheme.baseColorTheme.secondaryColor, shape = RoundedCornerShape(16.dp)))
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+                    .background(
+                        color = MaterialTheme.baseColorTheme.secondaryColor,
+                        shape = RoundedCornerShape(16.dp)
+                    )
+            )
 
         }
 
