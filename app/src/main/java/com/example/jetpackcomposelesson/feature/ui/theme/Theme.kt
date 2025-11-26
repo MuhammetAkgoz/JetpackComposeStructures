@@ -1,14 +1,14 @@
-package com.example.jetpackcomposelesson.ui.theme
+package com.example.jetpackcomposelesson.feature.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import com.example.jetpackcomposelesson.ui.theme.color.DarkColorScheme
-import com.example.jetpackcomposelesson.ui.theme.color.DarkColorTheme
-import com.example.jetpackcomposelesson.ui.theme.color.LightColorScheme
-import com.example.jetpackcomposelesson.ui.theme.color.LightColorTheme
-import com.example.jetpackcomposelesson.ui.theme.color.LocalBaseColorTheme
+import com.example.jetpackcomposelesson.feature.ui.theme.color.DarkColorScheme
+import com.example.jetpackcomposelesson.feature.ui.theme.color.DarkColorTheme
+import com.example.jetpackcomposelesson.feature.ui.theme.color.LightColorScheme
+import com.example.jetpackcomposelesson.feature.ui.theme.color.LightColorTheme
+import com.example.jetpackcomposelesson.feature.ui.theme.color.LocalBaseColorTheme
 
 @Composable
 fun JetpackComposeLessonTheme(
