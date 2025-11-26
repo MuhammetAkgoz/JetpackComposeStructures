@@ -11,8 +11,11 @@ import androidx.navigation.toRoute
 import com.example.jetpackcomposelesson.core.common.NavigationResult
 import com.example.jetpackcomposelesson.core.common.observeResult
 import com.example.jetpackcomposelesson.core.common.popBackStackWithResult
+import com.example.jetpackcomposelesson.feature.ui.screen.detail.DetailScreen
 import com.example.jetpackcomposelesson.feature.ui.screen.home.HomeScreen
+import com.example.jetpackcomposelesson.feature.ui.screen.notification.NotificationScreen
 import com.example.jetpackcomposelesson.feature.ui.screen.profile.ProfileScreen
+import com.example.jetpackcomposelesson.feature.ui.screen.search.SearchScreen
 
 @Composable
 fun NavGraph(
@@ -44,6 +47,18 @@ fun NavGraph(
                     navController.popBackStackWithResult(NavigationResult.PROFILE, result)
                 },
             )
+        }
+
+        composable<NotificationRoute> {
+            NotificationScreen()
+        }
+
+        composable<SearchRoute> {
+            SearchScreen()
+        }
+
+        composable<DetailRoute> {
+            DetailScreen()
         }
     }
 
