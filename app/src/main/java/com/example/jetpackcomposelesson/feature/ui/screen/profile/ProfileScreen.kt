@@ -11,20 +11,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.jetpackcomposelesson.core.navigation.ProfileRoute
 
 
 @Composable
 fun ProfileScreen(
     viewModel: ProfileViewModel = viewModel(),
-    profileRoute: ProfileRoute,
     onBack: (String) -> Unit
 ) {
     val state by viewModel.state.collectAsState()
 
     Column() {
-        Text(profileRoute.name)
-        Text(profileRoute.age.toString())
         Spacer(modifier = Modifier.height(20.dp))
 
         Button(onClick = { onBack("Say Hello") }) {
