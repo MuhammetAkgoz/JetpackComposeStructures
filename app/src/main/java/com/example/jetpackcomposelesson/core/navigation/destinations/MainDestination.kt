@@ -1,5 +1,4 @@
 package com.example.jetpackcomposelesson.core.navigation.destinations
-
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Notifications
@@ -23,13 +22,21 @@ data object HomeDestination : MenuKey, NavbarItem {
 }
 
 @Serializable
-data object NotificationDestination : MenuKey , NavbarItem {
+data object NotificationDestination : MenuKey, NavbarItem {
     override val icon = Icons.Default.Notifications
     override val label = "Notification"
 }
 
 @Serializable
-data object SearchDestination : MenuKey ,  NavbarItem {
+data object SearchDestination : MenuKey, NavbarItem {
     override val icon = Icons.Default.Search
     override val label = "Search"
 }
+
+@Serializable
+data object BottomSheetDestination
+
+@Serializable
+data object  AlertDialogDestination
+@Serializable
+data object  DialogDestination
