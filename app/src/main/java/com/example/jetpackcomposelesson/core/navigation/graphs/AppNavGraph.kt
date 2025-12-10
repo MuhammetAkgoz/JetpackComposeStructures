@@ -5,9 +5,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.dialog
-import androidx.navigation.navDeepLink
 import androidx.navigation.toRoute
 import com.example.jetpackcomposelesson.core.component.BaseBottomSheet
 import com.example.jetpackcomposelesson.core.component.BaseAlertDialog
@@ -24,10 +21,11 @@ import com.example.jetpackcomposelesson.feature.ui.screen.profile.ProfileScreen
 import com.stefanoq21.material3.navigation.BottomSheetNavigator
 import com.stefanoq21.material3.navigation.ModalBottomSheetLayout
 import androidx.core.net.toUri
-import com.example.jetpackcomposelesson.core.common.linkedBottomSheet
-import com.example.jetpackcomposelesson.core.common.linkedComposable
-import com.example.jetpackcomposelesson.core.common.linkedDialog
+import com.example.jetpackcomposelesson.core.extension.linkedBottomSheet
+import com.example.jetpackcomposelesson.core.extension.linkedComposable
+import com.example.jetpackcomposelesson.core.extension.linkedDialog
 import com.example.jetpackcomposelesson.core.menu.BaseDestination
+import com.stefanoq21.material3.navigation.bottomSheet
 
 
 @OptIn(ExperimentalMaterial3Api::class)
