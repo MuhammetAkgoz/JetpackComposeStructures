@@ -1,5 +1,7 @@
 package com.example.jetpackcomposelesson.core.navigation.graphs
 
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.tween
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -25,7 +27,6 @@ import com.example.jetpackcomposelesson.core.extension.linkedBottomSheet
 import com.example.jetpackcomposelesson.core.extension.linkedComposable
 import com.example.jetpackcomposelesson.core.extension.linkedDialog
 import com.example.jetpackcomposelesson.core.menu.BaseDestination
-import com.stefanoq21.material3.navigation.bottomSheet
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -43,7 +44,31 @@ fun AppNavGraph(
     ) {
         NavHost(
             navController = navController,
-            startDestination = startDestination
+            startDestination = startDestination,
+            enterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Start,
+                    tween(400)
+                )
+            },
+            exitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Start,
+                    tween(400)
+                )
+            },
+            popEnterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.End,
+                    tween(400)
+                )
+            },
+            popExitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.End,
+                    tween(400)
+                )
+            }
         ) {
             linkedComposable<MainDestination> {
                 MainNavGraph(

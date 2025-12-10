@@ -6,9 +6,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.jetpackcomposelesson.core.component.NavigationBar
+import com.example.jetpackcomposelesson.core.extension.linkedComposable
 import com.example.jetpackcomposelesson.core.menu.BaseDestination
 import com.example.jetpackcomposelesson.core.navigation.destinations.DetailDestination
 import com.example.jetpackcomposelesson.core.navigation.destinations.HomeDestination
@@ -33,7 +33,7 @@ fun MainNavGraph(rootNavController: NavController, startDestination: BaseDestina
             startDestination = startDestination,
             modifier = Modifier.padding(innerPadding)
         ) {
-            composable<HomeDestination> {
+            linkedComposable<HomeDestination> {
                 HomeScreen(
                     onNavigateToProfile = {
                         rootNavController.navigate( DetailDestination)
@@ -42,8 +42,8 @@ fun MainNavGraph(rootNavController: NavController, startDestination: BaseDestina
                 )
             }
 
-            composable<SearchDestination> { SearchScreen() }
-            composable<NotificationDestination> { NotificationScreen() }
+            linkedComposable<SearchDestination> { SearchScreen() }
+            linkedComposable<NotificationDestination> { NotificationScreen() }
         }
     }
 }
