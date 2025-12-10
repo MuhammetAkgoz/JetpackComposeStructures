@@ -17,6 +17,7 @@ fun DetailScreen(
     onBottomSheet: () -> Unit,
     onAlertDialog: () -> Unit,
     onDialog: () -> Unit,
+    onNavigateProfile: () -> Unit,
     viewModel: DetailViewModel =  viewModel()) {
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -31,6 +32,7 @@ fun DetailScreen(
             Button(onBottomSheet) { Text("Open Bottom Sheet") }
             Button(onAlertDialog) { Text("Open Alert Dialog") }
             Button(onDialog) { Text("Open Dialog") }
+            Button(onNavigateProfile) { Text("Open Profile") }
         }
     }
 }

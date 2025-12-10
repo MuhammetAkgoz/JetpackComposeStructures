@@ -15,10 +15,11 @@ import com.stefanoq21.material3.navigation.rememberBottomSheetNavigator
 fun MainApp(modifier: Modifier = Modifier) {
     val bottomSheetNavigator = rememberBottomSheetNavigator(skipPartiallyExpanded = true)
     val navController = rememberNavController(bottomSheetNavigator)
+
     AppNavGraph(
         modifier = modifier,
         navController = navController,
         bottomSheetNavigator = bottomSheetNavigator,
-        startDestination = DetailDestination,
+        startDestination = MainDestination,
     )
 }
