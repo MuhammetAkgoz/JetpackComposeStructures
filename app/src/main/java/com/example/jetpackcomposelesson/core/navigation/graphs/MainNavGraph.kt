@@ -9,7 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.jetpackcomposelesson.core.component.NavigationBar
-import com.example.jetpackcomposelesson.core.menu.MenuKey
+import com.example.jetpackcomposelesson.core.menu.BaseDestination
 import com.example.jetpackcomposelesson.core.navigation.destinations.DetailDestination
 import com.example.jetpackcomposelesson.core.navigation.destinations.HomeDestination
 import com.example.jetpackcomposelesson.core.navigation.destinations.NotificationDestination
@@ -20,7 +20,7 @@ import com.example.jetpackcomposelesson.feature.ui.screen.search.SearchScreen
 
 
 @Composable
-fun MainNavGraph(rootNavController: NavController, startDestination: MenuKey) {
+fun MainNavGraph(rootNavController: NavController, startDestination: BaseDestination) {
     val bottomBarNavController = rememberNavController()
 
     Scaffold(
@@ -44,7 +44,6 @@ fun MainNavGraph(rootNavController: NavController, startDestination: MenuKey) {
 
             composable<SearchDestination> { SearchScreen() }
             composable<NotificationDestination> { NotificationScreen() }
-
         }
     }
 }
