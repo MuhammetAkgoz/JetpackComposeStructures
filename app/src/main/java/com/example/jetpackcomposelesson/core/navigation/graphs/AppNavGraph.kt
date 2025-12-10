@@ -27,6 +27,7 @@ import com.example.jetpackcomposelesson.core.extension.linkedBottomSheet
 import com.example.jetpackcomposelesson.core.extension.linkedComposable
 import com.example.jetpackcomposelesson.core.extension.linkedDialog
 import com.example.jetpackcomposelesson.core.menu.BaseDestination
+import com.example.jetpackcomposelesson.core.navigation.destinations.HomeDestination
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -73,7 +74,7 @@ fun AppNavGraph(
             linkedComposable<MainDestination> {
                 MainNavGraph(
                     rootNavController = navController,
-                    startDestination = SearchDestination
+                    startDestination = HomeDestination
                 )
             }
 

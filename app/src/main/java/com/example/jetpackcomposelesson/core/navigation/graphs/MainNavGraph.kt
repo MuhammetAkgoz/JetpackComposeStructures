@@ -35,7 +35,7 @@ fun MainNavGraph(rootNavController: NavController, startDestination: BaseDestina
         ) {
             linkedComposable<HomeDestination> {
                 HomeScreen(
-                    onNavigateToProfile = {
+                    onDetailButtonClick = {
                         rootNavController.navigate( DetailDestination)
                     },
                     title = "Title"

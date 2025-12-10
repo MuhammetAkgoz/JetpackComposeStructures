@@ -14,20 +14,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -42,16 +34,16 @@ import com.example.jetpackcomposelesson.feature.ui.theme.color.baseColorTheme
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = viewModel(),
-    onNavigateToProfile: () -> Unit,
+    onDetailButtonClick: () -> Unit,
     title: String?,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
-    Section(onNavigateToProfile, title = title)
+    Section(onDetailButtonClick, title = title)
 }
 
 @Composable
-fun Section(onNavigateToProfile: () -> Unit, title: String?) {
+fun Section(onDetailButtonClick: () -> Unit, title: String?) {
     val manager = LocalThemeManager.current
 
     Column(
@@ -65,12 +57,7 @@ fun Section(onNavigateToProfile: () -> Unit, title: String?) {
         horizontalAlignment = Alignment.Start
     ) {
         /// Title
-        Text(
-            modifier = Modifier.clickable {
-                onNavigateToProfile()
-            },
-            text = title ?: "Feature", style = MaterialTheme.typography.titleLarge
-        )
+        Text(text = title ?: "Feature", style = MaterialTheme.typography.titleLarge)
 
         /// Boxes
         Row(
@@ -109,8 +96,8 @@ fun Section(onNavigateToProfile: () -> Unit, title: String?) {
         )
 
 
-        Button(onClick = { print("deneme") }) {
-            Text("Show Bottom Sheet")
+        Button(onDetailButtonClick) {
+            Text("Show Detail Screen")
         }
     }
 }
