@@ -17,9 +17,6 @@ import com.example.jetpackcomposelesson.core.navigation.destinations.AlertDialog
 import com.example.jetpackcomposelesson.core.navigation.destinations.DialogDestination
 import com.example.jetpackcomposelesson.core.navigation.destinations.MainDestination
 import com.example.jetpackcomposelesson.core.navigation.destinations.ProfileDestination
-import com.example.jetpackcomposelesson.core.navigation.destinations.SearchDestination
-import com.example.jetpackcomposelesson.feature.ui.screen.detail.DetailScreen
-import com.example.jetpackcomposelesson.feature.ui.screen.profile.ProfileScreen
 import com.stefanoq21.material3.navigation.BottomSheetNavigator
 import com.stefanoq21.material3.navigation.ModalBottomSheetLayout
 import androidx.core.net.toUri
@@ -28,6 +25,8 @@ import com.example.jetpackcomposelesson.core.extension.linkedComposable
 import com.example.jetpackcomposelesson.core.extension.linkedDialog
 import com.example.jetpackcomposelesson.core.menu.BaseDestination
 import com.example.jetpackcomposelesson.core.navigation.destinations.HomeDestination
+import com.example.presentation.screen.detail.DetailScreen
+import com.example.presentation.screen.profile.ProfileScreen
 
 
 @OptIn(ExperimentalMaterial3Api::class)

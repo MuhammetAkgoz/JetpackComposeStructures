@@ -14,9 +14,9 @@ import com.example.jetpackcomposelesson.core.navigation.destinations.DetailDesti
 import com.example.jetpackcomposelesson.core.navigation.destinations.HomeDestination
 import com.example.jetpackcomposelesson.core.navigation.destinations.NotificationDestination
 import com.example.jetpackcomposelesson.core.navigation.destinations.SearchDestination
-import com.example.jetpackcomposelesson.feature.ui.screen.home.HomeScreen
-import com.example.jetpackcomposelesson.feature.ui.screen.notification.NotificationScreen
-import com.example.jetpackcomposelesson.feature.ui.screen.search.SearchScreen
+import com.example.presentation.screen.home.HomeScreen
+import com.example.presentation.screen.notification.NotificationScreen
+import com.example.presentation.screen.search.SearchScreen
 
 
 @Composable
