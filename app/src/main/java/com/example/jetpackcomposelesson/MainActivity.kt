@@ -8,10 +8,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
-import com.example.jetpackcomposelesson.feature.ui.theme.JetpackComposeLessonTheme
-import com.example.jetpackcomposelesson.feature.ui.theme.LocalThemeManager
-import com.example.jetpackcomposelesson.feature.ui.theme.rememberThemeManager
+import com.example.presentation.theme.JetpackComposeLessonTheme
+import com.example.presentation.theme.LocalThemeManager
+import com.example.presentation.theme.rememberThemeManager
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
