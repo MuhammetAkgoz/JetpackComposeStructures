@@ -21,7 +21,7 @@ object NetworkModule {
     private val networkJson = Json { ignoreUnknownKeys = true }
 
     @Provides
-    fun provideBaseUrl() = "https://66e4784bd2405277ed14692e.mockapi.io"
+    fun provideBaseUrl() = "https://rickandmortyapi.com/api"
 
     @Singleton
     @Provides

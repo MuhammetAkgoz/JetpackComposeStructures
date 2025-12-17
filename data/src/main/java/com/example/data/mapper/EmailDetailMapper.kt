@@ -3,9 +3,9 @@ package com.example.data.mapper
 import com.example.core.functional.mapOrDefault
 import com.example.core.functional.orDefault
 import com.example.core.mapper.ResultMapper
-import com.example.data.dto.emaldetails.EmailDetailsDto
-import com.example.data.dto.emaldetails.RecipientInfo
-import com.example.data.dto.emaldetails.SenderInfo
+import com.example.data.response.emaldetails.EmailDetailsDto
+import com.example.data.response.emaldetails.RecipientInfo
+import com.example.data.response.emaldetails.SenderInfo
 import com.example.domain.model.emaildetails.EmailDetailsModel
 import com.example.domain.model.emaildetails.FileInfo
 import com.example.domain.model.emaildetails.RecipientModel

@@ -2,7 +2,7 @@ package com.example.data.mapper
 
 import com.example.core.functional.orDefault
 import com.example.core.mapper.ResultMapper
-import com.example.data.dto.emaillist.EmailListItemDto
+import com.example.data.response.emaillist.EmailListItemDto
 import com.example.domain.model.emaillist.EmailListItemModel
 import javax.inject.Inject
 
