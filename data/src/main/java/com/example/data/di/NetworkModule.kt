@@ -1,6 +1,10 @@
 package com.example.data.di
 
 import com.example.data.remote.api.ApiService
+import com.example.data.remote.interceptor.AuthTokenInterceptor
+import com.example.data.remote.interceptor.CacheInterceptor
+import com.example.data.remote.interceptor.ErrorInterceptor
+import com.example.data.remote.interceptor.PrettyLoggerInterceptor
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -21,7 +25,7 @@ object NetworkModule {
     private val networkJson = Json { ignoreUnknownKeys = true }
 
     @Provides
-    fun provideBaseUrl() = "https://66e4784bd2405277ed14692e.mockapi.io"
+    fun provideBaseUrl() = "https://rickandmortyapi.com/api/"
 
     @Singleton
     @Provides
@@ -36,7 +40,14 @@ object NetworkModule {
         interceptor: HttpLoggingInterceptor
     ): Retrofit = Retrofit.Builder().baseUrl(baseUrl)
         .addConverterFactory(networkJson.asConverterFactory("application/json".toMediaType()))
-        .client(OkHttpClient.Builder().addInterceptor(interceptor).build())
+        .client(OkHttpClient().newBuilder()
+            .addInterceptor(interceptor)
+            .addInterceptor(PrettyLoggerInterceptor())
+            .addInterceptor(ErrorInterceptor())
+            .addInterceptor(AuthTokenInterceptor())
+            .addInterceptor(CacheInterceptor())
+            .build()
+        )
         .build()
 
     @Singleton

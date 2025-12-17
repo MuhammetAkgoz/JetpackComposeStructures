@@ -1,7 +1,7 @@
 package com.example.data.di
 
-import com.example.data.repository.EmailRepositoryImpl
-import com.example.domain.repository.EmailRepository
+import com.example.data.repository.DefaultRickAndMortyRepository
+import com.example.domain.repository.RickAndMortyRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,5 +14,7 @@ abstract class RepositoryModule {
 
     @Binds
     @Singleton
-    abstract fun bindEmailRepository(emailRepositoryImpl: EmailRepositoryImpl): EmailRepository
+    abstract fun bindRickAndMortyRepository(
+        impl: DefaultRickAndMortyRepository
+    ): RickAndMortyRepository
 }
