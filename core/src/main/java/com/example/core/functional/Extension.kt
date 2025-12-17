@@ -24,3 +24,6 @@ fun Boolean?.orDefault(default : Boolean = false) : Boolean = this ?: default
 fun <T,R : Any> List<T>?.mapOrDefault(defaultListValue : List<R> = emptyList(), transform: (T) -> R): List<R> {
     return this?.filterNotNull()?.map(transform) ?: defaultListValue
 }
+
+
+fun Int?.orDefault(default : Int = 0) : Int = this ?: default

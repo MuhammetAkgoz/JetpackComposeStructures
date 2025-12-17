@@ -8,12 +8,12 @@ import retrofit2.http.GET
 
 interface ApiService {
 
-    @GET("/character")
+    @GET("character")
     suspend fun getCharacters() : Response<CharactersResponse>
 
-    @GET("/location")
+    @GET("location")
     suspend fun getLocations() : Response<LocationsResponse>
 
-    @GET("/episode")
+    @GET("episode")
     suspend fun getEpisodes() : Response<EpisodesResponse>
 }

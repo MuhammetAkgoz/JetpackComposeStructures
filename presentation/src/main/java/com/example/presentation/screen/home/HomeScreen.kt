@@ -40,7 +40,7 @@ fun HomeScreen(
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
-        viewModel.getEmails()
+        viewModel.getCharacters()
     }
 
     Section(onDetailButtonClick, title = title)
