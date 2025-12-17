@@ -1,5 +1,6 @@
 package com.example.presentation.screen.home
 
+import android.util.Log
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -24,7 +25,7 @@ class HomeViewModel @Inject constructor(
             repository.getCharacters().cross(
                 right = { characters ->
                     characters.map {
-                       it
+                       Log.i("mami", it.name)
                     }
                 },
                 left = {
