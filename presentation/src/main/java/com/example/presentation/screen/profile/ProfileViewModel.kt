@@ -1,10 +1,14 @@
 package com.example.presentation.screen.profile
-import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import com.example.core.base.BaseViewModel
+import com.example.core.base.ViewStatus
 
 
-class ProfileViewModel : ViewModel() {
-    private val _stateFlow = MutableStateFlow(ProfileState(state = 0))
-    val state: StateFlow<ProfileState> = _stateFlow
+class ProfileViewModel : BaseViewModel<ProfileState, ProfileEvent, ProfileEffect>() {
+    override fun createInitialState(): ProfileState {
+        return ProfileState(ViewStatus.INITIAL)
+    }
+
+    override fun consume(event: ProfileEvent) {
+        TODO("Not yet implemented")
+    }
 }
