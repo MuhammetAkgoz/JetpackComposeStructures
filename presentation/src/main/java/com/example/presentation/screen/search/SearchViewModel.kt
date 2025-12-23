@@ -1,10 +1,15 @@
 package com.example.presentation.screen.search
 
-import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import com.example.core.base.BaseViewModel
+import com.example.core.base.ViewStatus
 
-class SearchViewModel: ViewModel() {
-    private val _state = MutableStateFlow(SearchState("search"))
-    val state = _state.asStateFlow()
+class SearchViewModel : BaseViewModel<SearchState, SearchEvent, SearchEffect>() {
+    override fun createInitialState(): SearchState {
+        return SearchState(viewStatus = ViewStatus.INITIAL)
+    }
+
+    override fun consume(event: SearchEvent) {
+        TODO("Not yet implemented")
+    }
+
 }

@@ -1,11 +1,15 @@
 package com.example.presentation.screen.detail
 
-import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import com.example.core.base.BaseViewModel
 
 
-class DetailViewModel : ViewModel(){
-    private val _state = MutableStateFlow(DetailState("detail"))
-    val state = _state.asStateFlow()
+class DetailViewModel : BaseViewModel<DetailState, DetailEvent, DetailEffect>() {
+
+    override fun createInitialState(): DetailState {
+        return DetailState()
+    }
+
+    override fun consume(event: DetailEvent) {
+    }
+
 }
