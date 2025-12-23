@@ -10,7 +10,6 @@ import androidx.navigation.compose.rememberNavController
 import com.example.jetpackcomposelesson.core.component.NavigationBar
 import com.example.jetpackcomposelesson.core.extension.linkedComposable
 import com.example.jetpackcomposelesson.core.menu.BaseDestination
-import com.example.jetpackcomposelesson.core.navigation.destinations.DetailDestination
 import com.example.jetpackcomposelesson.core.navigation.destinations.HomeDestination
 import com.example.jetpackcomposelesson.core.navigation.destinations.NotificationDestination
 import com.example.jetpackcomposelesson.core.navigation.destinations.SearchDestination
@@ -34,12 +33,7 @@ fun MainNavGraph(rootNavController: NavController, startDestination: BaseDestina
             modifier = Modifier.padding(innerPadding)
         ) {
             linkedComposable<HomeDestination> {
-                HomeScreen(
-                    onDetailButtonClick = {
-                        rootNavController.navigate( DetailDestination)
-                    },
-                    title = "Title"
-                )
+                HomeScreen()
             }
 
             linkedComposable<SearchDestination> { SearchScreen() }

@@ -40,13 +40,13 @@ suspend fun <T, R> safeApiCall(
                 response.body()?.let {
                     Either.Right(mapper.map(it))
                 } ?: Either.Left(
-                    Failure.ServerError(
+                    Failure.ServerFailure(
                         code = response.code(),
                         message = response.message()
                     )
                 )
             } else {
-                Either.Left(Failure.ServerError(response.code(), response.message()))
+                Either.Left(Failure.ServerFailure(response.code(), response.message()))
             }
         }
     }.getOrElse {
