@@ -20,28 +20,32 @@ class HomeViewModel @Inject constructor(
     override fun createInitialState() = HomeState(viewStatus = ViewStatus.LOADING)
 
     init {
-        setEvent(HomeEvent.LoadData)
+        setEvent(HomeEvent.LoadData())
     }
 
     override fun consume(event: HomeEvent) {
         when (event) {
-            is HomeEvent.LoadData -> getCharacters()
+            is HomeEvent.LoadData -> getCharacters(event.page)
             is HomeEvent.OnCharacterClick -> setEffect { HomeEffect.ShowToast(event.url) }
         }
     }
 
 
-    private fun getCharacters() {
+    private fun getCharacters(at: Int) {
         viewModelScope.launch {
-            setState { copy(viewStatus = ViewStatus.LOADING, errorMessage = null) }
+            setState { copy(isLoadingMore = true) }
 
-            repository.getCharacters().cross(
+            repository.getCharacters(at).cross(
                 right = { characters ->
-                    delay(2000)
+                    delay(3000)
+                    val mergedCharacter = (state.value.characters + characters)
+
+
                     setState {
                         copy(
                             viewStatus = ViewStatus.SUCCESS,
-                            characters = characters.toImmutableList()
+                            characters = mergedCharacter.toImmutableList(),
+                            isLoadingMore = false
                         )
                     }
                 },

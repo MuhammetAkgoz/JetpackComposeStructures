@@ -12,17 +12,17 @@ import kotlinx.collections.immutable.persistentListOf
 data class HomeState(
     val characters: ImmutableList<CharacterModel> = persistentListOf(),
     val errorMessage: String? = null,
+    val isLoadingMore: Boolean = false,
 
     override val viewStatus: ViewStatus = ViewStatus.INITIAL,
 ) : BaseState
 
 sealed class HomeEvent : BaseEvent {
-    data object LoadData : HomeEvent()
+    data class LoadData(val page: Int = 1) : HomeEvent()
     data class OnCharacterClick(val url: String) : HomeEvent()
 }
 
 sealed class HomeEffect : BaseEffect {
     data class ShowToast(val url: String) : HomeEffect()
-    data class ShowError(val message: String) : HomeEffect()
     data class ShowErrorDialog(val errorModel: ErrorModel) : HomeEffect()
 }

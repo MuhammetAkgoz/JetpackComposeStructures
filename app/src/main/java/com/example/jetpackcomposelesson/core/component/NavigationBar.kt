@@ -19,7 +19,11 @@ import com.example.jetpackcomposelesson.core.navigation.destinations.SearchDesti
 
 
 @Composable
-fun NavigationBar(modifier: Modifier = Modifier, navController: NavController) {
+fun NavigationBar(
+    modifier: Modifier = Modifier,
+    navController: NavController,
+    onItemClick: (NavbarItem) -> Unit
+) {
     val destinations = listOf<NavbarItem>(
         HomeDestination,
         SearchDestination,
@@ -46,6 +50,7 @@ fun NavigationBar(modifier: Modifier = Modifier, navController: NavController) {
                     )
                 },
                 onClick = {
+                    onItemClick(screen)
                     navController.navigate(screen) {
                         popUpTo(navController.graph.findStartDestination().id) {
                             saveState = true

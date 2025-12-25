@@ -21,10 +21,14 @@ import com.example.presentation.screen.search.SearchScreen
 @Composable
 fun MainNavGraph(rootNavController: NavController, startDestination: BaseDestination) {
     val bottomBarNavController = rememberNavController()
-
+    var onHomeClick: (() -> Unit)? = null
     Scaffold(
         bottomBar = {
-            NavigationBar(navController = bottomBarNavController)
+            NavigationBar(navController = bottomBarNavController) {
+                if (it is HomeDestination) {
+                    onHomeClick?.invoke()
+                }
+            }
         }
     ) { innerPadding ->
         NavHost(
@@ -33,7 +37,9 @@ fun MainNavGraph(rootNavController: NavController, startDestination: BaseDestina
             modifier = Modifier.padding(innerPadding)
         ) {
             linkedComposable<HomeDestination> {
-                HomeScreen()
+                HomeScreen{ scrollTop ->
+                    onHomeClick = scrollTop
+                }
             }
 
             linkedComposable<SearchDestination> { SearchScreen() }

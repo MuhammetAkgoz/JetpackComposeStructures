@@ -1,4 +1,5 @@
 [versions]
+coilCompose = "3.3.0"
 material3Navigation = "1.0.5"
 agp = "8.12.3"
 kotlin = "2.1.0"
@@ -28,6 +29,8 @@ kotlinxImmutable = "0.3.7" # Güncel stabil sürüm
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
+coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coilCompose" }
 material3-navigation = { group = "io.github.stefanoq21", name = "material3-navigation", version.ref = "material3Navigation" }
 androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
