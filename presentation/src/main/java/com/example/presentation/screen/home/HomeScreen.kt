@@ -10,16 +10,21 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridState
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
-import androidx.compose.foundation.lazy.staggeredgrid.items
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan
+import androidx.compose.foundation.lazy.staggeredgrid.rememberLazyStaggeredGridState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,26 +42,35 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
 import com.example.coreui.builder.ScreenStateBuilder
 import com.example.domain.model.CharacterModel
-import com.example.presentation.theme.LocalThemeManager
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
+    onRegisterScrollToTop: (() -> Unit) -> Unit
 ) {
     val context = LocalContext.current
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val lazyStaggeredGridState = rememberLazyStaggeredGridState()
+    val scope = rememberCoroutineScope()
+
+    LaunchedEffect(Unit) {
+        onRegisterScrollToTop {
+            scope.launch {
+                lazyStaggeredGridState.animateScrollToItem(0)
+            }
+        }
+    }
 
     LaunchedEffect(key1 = true) {
         viewModel.effect.collect { effect ->
             when (effect) {
                 is HomeEffect.ShowToast -> {
                     Toast.makeText(context, effect.url, Toast.LENGTH_SHORT).show()
-                }
-
-                is HomeEffect.ShowError -> {
-                    // İstersen burada Snackbar gösterebilirsin
-                    // snackbarHostState.showSnackbar(effect.message)
                 }
 
                 is HomeEffect.ShowErrorDialog -> {
@@ -66,8 +80,25 @@ fun HomeScreen(
         }
     }
 
+    LaunchedEffect(lazyStaggeredGridState) {
+        snapshotFlow { lazyStaggeredGridState.layoutInfo.visibleItemsInfo }
+            .distinctUntilChanged()
+            .filter { it.isNotEmpty() }
+            .collectLatest { visibleItems ->
+                val lastVisibleItem = visibleItems.last()
+                val totalItems = lazyStaggeredGridState.layoutInfo.totalItemsCount
+
+
+                if (lastVisibleItem.index >= totalItems - 2 && !state.isLoadingMore) {
+                    val page = totalItems / 20 + 1
+                    viewModel.setEvent(HomeEvent.LoadData(page))
+                }
+            }
+    }
+
     HomeContent(
         state = state,
+        lazyGridState = lazyStaggeredGridState,
         onEvent = viewModel::setEvent
     )
 }
@@ -75,9 +106,9 @@ fun HomeScreen(
 @Composable
 fun HomeContent(
     state: HomeState,
+    lazyGridState: LazyStaggeredGridState,
     onEvent: (HomeEvent) -> Unit
 ) {
-    val manager = LocalThemeManager.current
 
     ScreenStateBuilder(
         state = state
@@ -87,9 +118,12 @@ fun HomeContent(
             contentPadding = PaddingValues(12.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalItemSpacing = 16.dp,
+            state = lazyGridState,
             modifier = Modifier.fillMaxWidth()
         ) {
-            items(state.characters, key = { it.id }) { character ->
+            items(state.characters.size, key = { it }) { index ->
+                val character = state.characters[index]
+
 
                 val randomHeight = remember(character.id) {
                     Random(character.id).nextInt(150, 300).dp
@@ -101,6 +135,20 @@ fun HomeContent(
                     randomHeight = randomHeight
                 )
             }
+
+            if (state.isLoadingMore) {
+                item(span = StaggeredGridItemSpan.FullLine) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 16.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        CircularProgressIndicator()
+                    }
+                }
+            }
+
         }
     }
 }
