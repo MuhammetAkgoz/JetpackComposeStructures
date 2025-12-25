@@ -20,8 +20,8 @@ class DefaultRickAndMortyRepository @Inject constructor(
     private val locationMapper: LocationResponseMapper,
     private val episodeMapper: EpisodeResponseMapper,
 ) : RickAndMortyRepository {
-    override suspend fun getCharacters(): Either<Failure, List<CharacterModel>> = safeApiCall(
-        apiCall = { api.getCharacters() },
+    override suspend fun getCharacters(page: Int): Either<Failure, List<CharacterModel>> = safeApiCall(
+        apiCall = { api.getCharacters(page) },
         mapper = { characterMapper.map(it) }
     )
 
