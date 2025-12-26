@@ -4,9 +4,9 @@ enum class MenuKey {
     PROFILE,
     DETAIL,
     MAIN,
-    HOME,
+    CHARACTERS,
     NOTIFICATION,
-    SEARCH,
+    LOCATIONS,
     BOTTOM_SHEET,
     ALERT_DIALOG,
     DIALOG

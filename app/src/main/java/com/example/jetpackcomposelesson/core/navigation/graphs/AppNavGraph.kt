@@ -24,7 +24,7 @@ import com.example.jetpackcomposelesson.core.extension.linkedBottomSheet
 import com.example.jetpackcomposelesson.core.extension.linkedComposable
 import com.example.jetpackcomposelesson.core.extension.linkedDialog
 import com.example.jetpackcomposelesson.core.menu.BaseDestination
-import com.example.jetpackcomposelesson.core.navigation.destinations.HomeDestination
+import com.example.jetpackcomposelesson.core.navigation.destinations.CharactersDestination
 import com.example.presentation.screen.detail.DetailScreen
 import com.example.presentation.screen.profile.ProfileScreen
 
@@ -73,7 +73,7 @@ fun AppNavGraph(
             linkedComposable<MainDestination> {
                 MainNavGraph(
                     rootNavController = navController,
-                    startDestination = HomeDestination
+                    startDestination = CharactersDestination
                 )
             }
 

@@ -1,9 +1,9 @@
 package com.example.jetpackcomposelesson.core.navigation.destinations
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.People
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.example.jetpackcomposelesson.core.menu.BaseDestination
 import com.example.jetpackcomposelesson.core.menu.MenuKey
@@ -22,12 +22,12 @@ data object MainDestination : BaseDestination(
 )
 
 @Serializable
-data object HomeDestination : BaseDestination(
-    key = MenuKey.HOME,
-    name = ScreenName.HOME
+data object CharactersDestination : BaseDestination(
+    key = MenuKey.CHARACTERS,
+    name = ScreenName.CHARACTERS
 ), NavbarItem {
-    override val icon = Icons.Default.Home
-    override val label = "Home"
+    override val icon = Icons.Default.People
+    override val label = "Characters"
 }
 
 @Serializable
@@ -40,12 +40,12 @@ data object NotificationDestination : BaseDestination(
 }
 
 @Serializable
-data object SearchDestination : BaseDestination(
-    key = MenuKey.SEARCH,
-    name = ScreenName.SEARCH
+data object LocationsDestination : BaseDestination(
+    key = MenuKey.LOCATIONS,
+    name = ScreenName.LOCATIONS
 ), NavbarItem {
-    override val icon = Icons.Default.Search
-    override val label = "Search"
+    override val icon = Icons.Default.LocationOn
+    override val label = "Locations"
 }
 
 @Serializable

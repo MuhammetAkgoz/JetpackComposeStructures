@@ -12,10 +12,10 @@ import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.jetpackcomposelesson.core.navigation.destinations.HomeDestination
+import com.example.jetpackcomposelesson.core.navigation.destinations.CharactersDestination
 import com.example.jetpackcomposelesson.core.navigation.destinations.NavbarItem
 import com.example.jetpackcomposelesson.core.navigation.destinations.NotificationDestination
-import com.example.jetpackcomposelesson.core.navigation.destinations.SearchDestination
+import com.example.jetpackcomposelesson.core.navigation.destinations.LocationsDestination
 
 
 @Composable
@@ -25,8 +25,8 @@ fun NavigationBar(
     onItemClick: (NavbarItem) -> Unit
 ) {
     val destinations = listOf<NavbarItem>(
-        HomeDestination,
-        SearchDestination,
+        CharactersDestination,
+        LocationsDestination,
         NotificationDestination
     )
 

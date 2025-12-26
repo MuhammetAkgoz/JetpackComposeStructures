@@ -1,10 +1,9 @@
-package com.example.presentation.screen.home
+package com.example.presentation.screen.locations
 
 import androidx.lifecycle.viewModelScope
 import com.example.core.base.BaseViewModel
 import com.example.core.base.ViewStatus
 import com.example.core.functional.cross
-import com.example.domain.model.asError
 import com.example.domain.repository.RickAndMortyRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.toImmutableList
@@ -13,47 +12,45 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class LocationsViewModel @Inject constructor(
     private val repository: RickAndMortyRepository
-) : BaseViewModel<HomeState, HomeEvent, HomeEffect>() {
-
-    override fun createInitialState() = HomeState(viewStatus = ViewStatus.LOADING)
+) : BaseViewModel<LocationsState, LocationsEvent, LocationsEffect>() {
 
     init {
-        setEvent(HomeEvent.LoadData())
+        setEvent(LocationsEvent.LoadData())
     }
 
-    override fun consume(event: HomeEvent) {
+    override fun createInitialState(): LocationsState {
+        return LocationsState(viewStatus = ViewStatus.LOADING)
+    }
+
+    override fun consume(event: LocationsEvent) {
         when (event) {
-            is HomeEvent.LoadData -> getCharacters(event.page)
-            is HomeEvent.OnCharacterClick -> setEffect { HomeEffect.ShowToast(event.url) }
+            is LocationsEvent.LoadData -> getLocations(event.at)
         }
     }
 
-
-    private fun getCharacters(at: Int) {
+    private fun getLocations(at: Int) {
+        setState { copy(isLoadingMore = true) }
         viewModelScope.launch {
-            setState { copy(isLoadingMore = true) }
-
-            repository.getCharacters(at).cross(
-                right = { characters ->
+            repository.getLocations(at).cross(
+                right = { locations ->
                     delay(3000)
-                    val mergedCharacter = (state.value.characters + characters)
-
+                    val mergedLocations = state.value.locations + locations
 
                     setState {
                         copy(
                             viewStatus = ViewStatus.SUCCESS,
-                            characters = mergedCharacter.toImmutableList(),
+                            locations = mergedLocations.toImmutableList(),
                             isLoadingMore = false
                         )
                     }
                 },
                 left = {
                     setState { copy(viewStatus = ViewStatus.ERROR) }
-                    setEffect { HomeEffect.ShowErrorDialog(it.asError()) }
                 }
             )
         }
     }
+
 }

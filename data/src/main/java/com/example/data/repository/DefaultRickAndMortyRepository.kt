@@ -31,8 +31,8 @@ class DefaultRickAndMortyRepository @Inject constructor(
     )
 
 
-    override suspend fun getLocations(): Either<Failure, List<LocationModel>> = safeApiCall(
-        apiCall = { api.getLocations() },
+    override suspend fun getLocations(page: Int): Either<Failure, List<LocationModel>> = safeApiCall(
+        apiCall = { api.getLocations(page) },
         mapper = { locationMapper.map(it) }
     )
 }

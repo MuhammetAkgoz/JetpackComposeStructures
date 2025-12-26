@@ -60,4 +60,5 @@ dependencies {
     implementation(libs.androidx.constraintlayout.compose)
     implementation(libs.extendedspans)
     api(libs.androidx.material.icons.extended)
+    api(libs.coil.compose)
 }

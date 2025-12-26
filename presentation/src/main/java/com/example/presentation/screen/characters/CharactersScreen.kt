@@ -1,4 +1,4 @@
-package com.example.presentation.screen.home
+package com.example.presentation.screen.characters
 
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -30,6 +30,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -42,6 +44,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
 import com.example.coreui.builder.ScreenStateBuilder
 import com.example.domain.model.CharacterModel
+import com.example.domain.model.Status
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filter
@@ -49,8 +52,8 @@ import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 @Composable
-fun HomeScreen(
-    viewModel: HomeViewModel = hiltViewModel(),
+fun CharactersScreen(
+    viewModel: CharactersViewModel = hiltViewModel(),
     onRegisterScrollToTop: (() -> Unit) -> Unit
 ) {
     val context = LocalContext.current
@@ -69,11 +72,11 @@ fun HomeScreen(
     LaunchedEffect(key1 = true) {
         viewModel.effect.collect { effect ->
             when (effect) {
-                is HomeEffect.ShowToast -> {
+                is CharactersEffect.ShowToast -> {
                     Toast.makeText(context, effect.url, Toast.LENGTH_SHORT).show()
                 }
 
-                is HomeEffect.ShowErrorDialog -> {
+                is CharactersEffect.ShowErrorDialog -> {
                     print(effect.errorModel.message)
                 }
             }
@@ -91,23 +94,21 @@ fun HomeScreen(
 
                 if (lastVisibleItem.index >= totalItems - 2 && !state.isLoadingMore) {
                     val page = totalItems / 20 + 1
-                    viewModel.setEvent(HomeEvent.LoadData(page))
+                    viewModel.setEvent(CharacterEvent.LoadData(page))
                 }
             }
     }
 
-    HomeContent(
+    CharactersContent(
         state = state,
         lazyGridState = lazyStaggeredGridState,
-        onEvent = viewModel::setEvent
     )
 }
 
 @Composable
-fun HomeContent(
-    state: HomeState,
+fun CharactersContent(
+    state: CharactersState,
     lazyGridState: LazyStaggeredGridState,
-    onEvent: (HomeEvent) -> Unit
 ) {
 
     ScreenStateBuilder(
@@ -126,13 +127,12 @@ fun HomeContent(
 
 
                 val randomHeight = remember(character.id) {
-                    Random(character.id).nextInt(150, 300).dp
+                    Random(character.id).nextInt(150, 300)
                 }
-
 
                 CharacterItem(
                     character = character,
-                    randomHeight = randomHeight
+                    randomHeight = randomHeight.dp
                 )
             }
 
@@ -153,11 +153,24 @@ fun HomeContent(
     }
 }
 
+
 @Composable
 fun CharacterItem(
     character: CharacterModel,
     randomHeight: Dp
 ) {
+
+    val colorFilter = remember(character.id) {
+        val isDead = character.status == Status.Dead
+        if (isDead) {
+            val matrix = ColorMatrix()
+            matrix.setToSaturation(0f)
+            ColorFilter.colorMatrix(matrix)
+        } else {
+            null
+        }
+    }
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -169,6 +182,7 @@ fun CharacterItem(
             model = character.image,
             contentDescription = character.name,
             contentScale = ContentScale.Crop,
+            colorFilter = colorFilter,
             modifier = Modifier.fillMaxSize()
         )
 

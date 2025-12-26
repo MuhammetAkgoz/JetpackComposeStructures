@@ -1,4 +1,4 @@
-package com.example.presentation.screen.home
+package com.example.presentation.screen.characters
 
 import com.example.core.base.BaseEffect
 import com.example.core.base.BaseEvent
@@ -9,7 +9,7 @@ import com.example.domain.model.ErrorModel
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 
-data class HomeState(
+data class CharactersState(
     val characters: ImmutableList<CharacterModel> = persistentListOf(),
     val errorMessage: String? = null,
     val isLoadingMore: Boolean = false,
@@ -17,12 +17,12 @@ data class HomeState(
     override val viewStatus: ViewStatus = ViewStatus.INITIAL,
 ) : BaseState
 
-sealed class HomeEvent : BaseEvent {
-    data class LoadData(val page: Int = 1) : HomeEvent()
-    data class OnCharacterClick(val url: String) : HomeEvent()
+sealed class CharacterEvent : BaseEvent {
+    data class LoadData(val page: Int = 1) : CharacterEvent()
+    data class OnCharacterClick(val url: String) : CharacterEvent()
 }
 
-sealed class HomeEffect : BaseEffect {
-    data class ShowToast(val url: String) : HomeEffect()
-    data class ShowErrorDialog(val errorModel: ErrorModel) : HomeEffect()
+sealed class CharactersEffect : BaseEffect {
+    data class ShowToast(val url: String) : CharactersEffect()
+    data class ShowErrorDialog(val errorModel: ErrorModel) : CharactersEffect()
 }
