@@ -10,12 +10,12 @@ import androidx.navigation.compose.rememberNavController
 import com.example.jetpackcomposelesson.core.component.NavigationBar
 import com.example.jetpackcomposelesson.core.extension.linkedComposable
 import com.example.jetpackcomposelesson.core.menu.BaseDestination
-import com.example.jetpackcomposelesson.core.navigation.destinations.HomeDestination
+import com.example.jetpackcomposelesson.core.navigation.destinations.CharactersDestination
 import com.example.jetpackcomposelesson.core.navigation.destinations.NotificationDestination
-import com.example.jetpackcomposelesson.core.navigation.destinations.SearchDestination
-import com.example.presentation.screen.home.HomeScreen
+import com.example.jetpackcomposelesson.core.navigation.destinations.LocationsDestination
+import com.example.presentation.screen.characters.CharactersScreen
 import com.example.presentation.screen.notification.NotificationScreen
-import com.example.presentation.screen.search.SearchScreen
+import com.example.presentation.screen.locations.LocationsScreen
 
 
 @Composable
@@ -25,7 +25,7 @@ fun MainNavGraph(rootNavController: NavController, startDestination: BaseDestina
     Scaffold(
         bottomBar = {
             NavigationBar(navController = bottomBarNavController) {
-                if (it is HomeDestination) {
+                if (it is CharactersDestination) {
                     onHomeClick?.invoke()
                 }
             }
@@ -36,13 +36,13 @@ fun MainNavGraph(rootNavController: NavController, startDestination: BaseDestina
             startDestination = startDestination,
             modifier = Modifier.padding(innerPadding)
         ) {
-            linkedComposable<HomeDestination> {
-                HomeScreen{ scrollTop ->
+            linkedComposable<CharactersDestination> {
+                CharactersScreen{ scrollTop ->
                     onHomeClick = scrollTop
                 }
             }
 
-            linkedComposable<SearchDestination> { SearchScreen() }
+            linkedComposable<LocationsDestination> { LocationsScreen() }
             linkedComposable<NotificationDestination> { NotificationScreen() }
         }
     }

@@ -7,6 +7,7 @@ import com.example.data.response.CharactersResponse
 import com.example.domain.model.CharacterModel
 import com.example.domain.model.LocationModel
 import com.example.domain.model.OriginModel
+import com.example.domain.model.Status
 import javax.inject.Inject
 
 
@@ -14,10 +15,12 @@ class CharacterResponseMapper @Inject constructor() :
     ResultMapper<CharactersResponse, List<CharacterModel>> {
     override fun map(input: CharactersResponse): List<CharacterModel> {
         return input.results.mapOrDefault {
+            val status = Status.fromString(it?.status.orEmpty())
+
             CharacterModel(
                 id = it?.id.orDefault(),
                 name = it?.name.orEmpty(),
-                status = it?.status.orEmpty(),
+                status = status,
                 species = it?.species.orEmpty(),
                 type = it?.type.orEmpty(),
                 gender = it?.gender.orEmpty(),
