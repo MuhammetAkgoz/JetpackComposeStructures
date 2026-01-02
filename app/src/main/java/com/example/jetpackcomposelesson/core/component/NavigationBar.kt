@@ -14,7 +14,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.jetpackcomposelesson.core.navigation.destinations.CharactersDestination
 import com.example.jetpackcomposelesson.core.navigation.destinations.NavbarItem
-import com.example.jetpackcomposelesson.core.navigation.destinations.NotificationDestination
+import com.example.jetpackcomposelesson.core.navigation.destinations.EpisodesDesination
 import com.example.jetpackcomposelesson.core.navigation.destinations.LocationsDestination
 
 
@@ -27,7 +27,7 @@ fun NavigationBar(
     val destinations = listOf<NavbarItem>(
         CharactersDestination,
         LocationsDestination,
-        NotificationDestination
+        EpisodesDesination
     )
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()

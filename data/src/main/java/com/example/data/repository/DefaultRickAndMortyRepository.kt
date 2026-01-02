@@ -25,8 +25,8 @@ class DefaultRickAndMortyRepository @Inject constructor(
         mapper = { characterMapper.map(it) }
     )
 
-    override suspend fun getEpisodes(): Either<Failure, List<EpisodeModel>> = safeApiCall(
-        apiCall = { api.getEpisodes() },
+    override suspend fun getEpisodes(page: Int): Either<Failure, List<EpisodeModel>> = safeApiCall(
+        apiCall = { api.getEpisodes(page) },
         mapper = { episodeMapper.map(it) }
     )
 

@@ -5,7 +5,7 @@ enum class MenuKey {
     DETAIL,
     MAIN,
     CHARACTERS,
-    NOTIFICATION,
+    EPISODES,
     LOCATIONS,
     BOTTOM_SHEET,
     ALERT_DIALOG,

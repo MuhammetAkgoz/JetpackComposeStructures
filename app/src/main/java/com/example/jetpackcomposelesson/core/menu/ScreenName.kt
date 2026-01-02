@@ -5,7 +5,7 @@ enum class ScreenName(val value: String) {
     DETAIL( "detay ekrani"),
     MAIN("genel ekran"),
     CHARACTERS("karakterler ekrani"),
-    NOTIFICATION("bildirim ekrani"),
+    EPISODES("bolumler ekrani"),
     LOCATIONS("konumlar ekrani"),
     BOTTOM_SHEET("bottomsheet widgeti"),
     ALERT_DIALOG("alertdialog widgeti"),

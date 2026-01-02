@@ -2,7 +2,7 @@ package com.example.jetpackcomposelesson.core.navigation.destinations
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Movie
 import androidx.compose.material.icons.filled.People
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.example.jetpackcomposelesson.core.menu.BaseDestination
@@ -31,12 +31,12 @@ data object CharactersDestination : BaseDestination(
 }
 
 @Serializable
-data object NotificationDestination : BaseDestination(
-    key = MenuKey.NOTIFICATION,
-    name = ScreenName.NOTIFICATION
+data object EpisodesDesination : BaseDestination(
+    key = MenuKey.EPISODES,
+    name = ScreenName.EPISODES
 ), NavbarItem {
-    override val icon = Icons.Default.Notifications
-    override val label = "Notification"
+    override val icon = Icons.Default.Movie
+    override val label = "Episodes"
 }
 
 @Serializable

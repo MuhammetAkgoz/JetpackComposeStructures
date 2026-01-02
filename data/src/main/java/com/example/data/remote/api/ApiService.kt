@@ -16,5 +16,5 @@ interface ApiService {
     suspend fun getLocations(@Query("page") page: Int): Response<LocationsResponse>
 
     @GET("episode")
-    suspend fun getEpisodes() : Response<EpisodesResponse>
+    suspend fun getEpisodes(@Query("page") page: Int) : Response<EpisodesResponse>
 }
