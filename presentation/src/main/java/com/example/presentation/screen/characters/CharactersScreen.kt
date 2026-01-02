@@ -17,8 +17,10 @@ import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridItemSpan
 import androidx.compose.foundation.lazy.staggeredgrid.rememberLazyStaggeredGridState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -42,7 +44,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
-import com.example.coreui.builder.ScreenStateBuilder
+import com.example.coreui.component.builder.ScreenStateBuilder
 import com.example.domain.model.CharacterModel
 import com.example.domain.model.Status
 import kotlinx.coroutines.flow.collectLatest
@@ -51,6 +53,7 @@ import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CharactersScreen(
     viewModel: CharactersViewModel = hiltViewModel(),
@@ -99,6 +102,8 @@ fun CharactersScreen(
             }
     }
 
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+
     CharactersContent(
         state = state,
         lazyGridState = lazyStaggeredGridState,
@@ -112,11 +117,11 @@ fun CharactersContent(
 ) {
 
     ScreenStateBuilder(
-        state = state
+        state = state,
+        paddingValues = PaddingValues.Zero
     ) {
         LazyVerticalStaggeredGrid(
             columns = StaggeredGridCells.Fixed(2),
-            contentPadding = PaddingValues(12.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalItemSpacing = 16.dp,
             state = lazyGridState,

@@ -11,10 +11,10 @@ import com.example.jetpackcomposelesson.core.component.NavigationBar
 import com.example.jetpackcomposelesson.core.extension.linkedComposable
 import com.example.jetpackcomposelesson.core.menu.BaseDestination
 import com.example.jetpackcomposelesson.core.navigation.destinations.CharactersDestination
-import com.example.jetpackcomposelesson.core.navigation.destinations.NotificationDestination
+import com.example.jetpackcomposelesson.core.navigation.destinations.EpisodesDesination
 import com.example.jetpackcomposelesson.core.navigation.destinations.LocationsDestination
 import com.example.presentation.screen.characters.CharactersScreen
-import com.example.presentation.screen.notification.NotificationScreen
+import com.example.presentation.screen.episodes.EpisodesScreen
 import com.example.presentation.screen.locations.LocationsScreen
 
 
@@ -43,7 +43,7 @@ fun MainNavGraph(rootNavController: NavController, startDestination: BaseDestina
             }
 
             linkedComposable<LocationsDestination> { LocationsScreen() }
-            linkedComposable<NotificationDestination> { NotificationScreen() }
+            linkedComposable<EpisodesDesination> { EpisodesScreen() }
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.coreui.content
+package com.example.coreui.component.content
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -92,7 +93,7 @@ fun ErrorContent(
             text = "Code: ${code} | Type: ${type}",
             style = MaterialTheme.typography.labelSmall,
             color = Color.Gray.copy(alpha = 0.5f),
-            fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace
+            fontFamily = FontFamily.Monospace
         )
     }
 }

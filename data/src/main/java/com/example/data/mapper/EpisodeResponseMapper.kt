@@ -16,9 +16,10 @@ class EpisodeResponseMapper @Inject constructor() :
                 id = it?.id.orDefault(),
                 name = it?.name.orEmpty(),
                 airDate = it?.airDate.orEmpty(),
-                episode = it?.episode.orEmpty(),
+                code = it?.episode.orEmpty(),
                 url = it?.url.orEmpty(),
-                created = it?.created.orEmpty()
+                created = it?.created.orEmpty(),
+                characterCount = it?.characters?.size.orDefault()
             )
         }
     }

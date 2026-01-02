@@ -1,4 +1,4 @@
-package com.example.jetpackcomposelesson.core.extension
+package com.example.coreui.extension
 
 import androidx.navigation.NavController
 

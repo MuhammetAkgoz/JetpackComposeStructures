@@ -8,7 +8,6 @@ import com.example.domain.model.asError
 import com.example.domain.repository.RickAndMortyRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.toImmutableList
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -37,7 +36,7 @@ class CharactersViewModel @Inject constructor(
 
             repository.getCharacters(at).cross(
                 right = { characters ->
-                    delay(3000)
+                    //delay(3000)
                     val mergedCharacter = (state.value.characters + characters)
 
 
