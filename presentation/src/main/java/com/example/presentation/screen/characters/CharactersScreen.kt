@@ -123,6 +123,7 @@ fun CharactersContent(
         LazyVerticalStaggeredGrid(
             columns = StaggeredGridCells.Fixed(2),
             horizontalArrangement = Arrangement.spacedBy(12.dp),
+            contentPadding = PaddingValues(horizontal = 12.dp),
             verticalItemSpacing = 16.dp,
             state = lazyGridState,
             modifier = Modifier.fillMaxWidth()
