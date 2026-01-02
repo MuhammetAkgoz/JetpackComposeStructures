@@ -1,4 +1,4 @@
-package com.example.jetpackcomposelesson.core.extension
+package com.example.coreui.extension
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State

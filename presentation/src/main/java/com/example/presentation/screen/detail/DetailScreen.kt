@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.coreui.builder.ScreenStateBuilder
+import com.example.coreui.component.builder.ScreenStateBuilder
 
 
 @Composable
