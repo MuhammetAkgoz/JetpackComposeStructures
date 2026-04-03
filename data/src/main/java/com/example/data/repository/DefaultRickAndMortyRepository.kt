@@ -20,10 +20,22 @@ class DefaultRickAndMortyRepository @Inject constructor(
     private val locationMapper: LocationResponseMapper,
     private val episodeMapper: EpisodeResponseMapper,
 ) : RickAndMortyRepository {
-    override suspend fun getCharacters(page: Int): Either<Failure, List<CharacterModel>> = safeApiCall(
-        apiCall = { api.getCharacters(page) },
-        mapper = { characterMapper.map(it) }
-    )
+    private val cachedCharacters = java.util.concurrent.ConcurrentHashMap<Int, CharacterModel>()
+
+    override suspend fun getCharacters(page: Int): Either<Failure, List<CharacterModel>> {
+        val response = safeApiCall(
+            apiCall = { api.getCharacters(page) },
+            mapper = { characterMapper.map(input = it) }
+        )
+
+        if (response is Either.Right) {
+            response.value.forEach { character ->
+                cachedCharacters[character.id] = character
+            }
+        }
+
+        return response
+    }
 
     override suspend fun getEpisodes(page: Int): Either<Failure, List<EpisodeModel>> = safeApiCall(
         apiCall = { api.getEpisodes(page) },
@@ -31,8 +43,19 @@ class DefaultRickAndMortyRepository @Inject constructor(
     )
 
 
-    override suspend fun getLocations(page: Int): Either<Failure, List<LocationModel>> = safeApiCall(
-        apiCall = { api.getLocations(page) },
-        mapper = { locationMapper.map(it) }
-    )
+    override suspend fun getLocations(page: Int): Either<Failure, List<LocationModel>> =
+        safeApiCall(
+            apiCall = { api.getLocations(page) },
+            mapper = { locationMapper.map(it) }
+        )
+
+    override fun getCachedCharacterById(id: Int): Either<Failure, CharacterModel> {
+        val character = cachedCharacters[id]
+
+        return if (character != null) {
+            Either.Right(character)
+        } else {
+            Either.Left(Failure.unspecified())
+        }
+    }
 }

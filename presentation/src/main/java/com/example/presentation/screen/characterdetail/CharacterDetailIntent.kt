@@ -4,12 +4,16 @@ import com.example.core.base.BaseEffect
 import com.example.core.base.BaseEvent
 import com.example.core.base.BaseState
 import com.example.core.base.ViewStatus
+import com.example.domain.model.CharacterModel
 
 
-data object CharacterDetailState : BaseState {
-    override val viewStatus: ViewStatus
-        get() = ViewStatus.SUCCESS
+data class CharacterDetailState(
+    val character: CharacterModel? = null,
+    override val viewStatus: ViewStatus = ViewStatus.SUCCESS
+) : BaseState
+
+sealed class CharacterDetailEvent : BaseEvent {
+    data class getCharacterById(val id: Int?) : CharacterDetailEvent()
 }
 
-data object  CharacterDetailEvent: BaseEvent
-data object  CharacterDetailEffect: BaseEffect
+data object CharacterDetailEffect : BaseEffect

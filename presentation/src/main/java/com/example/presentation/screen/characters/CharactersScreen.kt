@@ -2,6 +2,7 @@ package com.example.presentation.screen.characters
 
 import android.widget.Toast
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -57,7 +58,8 @@ import kotlin.random.Random
 @Composable
 fun CharactersScreen(
     viewModel: CharactersViewModel = hiltViewModel(),
-    onRegisterScrollToTop: (() -> Unit) -> Unit
+    onRegisterScrollToTop: (() -> Unit) -> Unit,
+    onNavigateToDetail: (CharacterModel) -> Unit
 ) {
     val context = LocalContext.current
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -81,6 +83,10 @@ fun CharactersScreen(
 
                 is CharactersEffect.ShowErrorDialog -> {
                     print(effect.errorModel.message)
+                }
+
+                is CharactersEffect.NavigateToDetail -> {
+                    onNavigateToDetail(effect.character)
                 }
             }
         }
@@ -107,6 +113,7 @@ fun CharactersScreen(
     CharactersContent(
         state = state,
         lazyGridState = lazyStaggeredGridState,
+        onCharacterClick = { viewModel.setEvent(CharacterEvent.OnCharacterClick(it)) }
     )
 }
 
@@ -114,6 +121,7 @@ fun CharactersScreen(
 fun CharactersContent(
     state: CharactersState,
     lazyGridState: LazyStaggeredGridState,
+    onCharacterClick: (CharacterModel) -> Unit,
 ) {
 
     ScreenStateBuilder(
@@ -138,7 +146,8 @@ fun CharactersContent(
 
                 CharacterItem(
                     character = character,
-                    randomHeight = randomHeight.dp
+                    randomHeight = randomHeight.dp,
+                    onClick = { onCharacterClick(character) }
                 )
             }
 
@@ -163,7 +172,8 @@ fun CharactersContent(
 @Composable
 fun CharacterItem(
     character: CharacterModel,
-    randomHeight: Dp
+    randomHeight: Dp,
+    onClick: () -> Unit
 ) {
 
     val colorFilter = remember(character.id) {
@@ -183,6 +193,7 @@ fun CharacterItem(
             .height(randomHeight)
             .clip(RoundedCornerShape(16.dp))
             .background(MaterialTheme.colorScheme.surfaceVariant)
+            .clickable{ onClick() }
     ) {
         AsyncImage(
             model = character.image,

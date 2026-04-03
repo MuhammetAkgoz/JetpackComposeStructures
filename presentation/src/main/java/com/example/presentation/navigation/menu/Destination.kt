@@ -1,4 +1,4 @@
-package com.example.jetpackcomposelesson.core.menu
+package com.example.presentation.navigation.menu
 
 import kotlinx.serialization.Serializable
 import java.util.Locale.getDefault

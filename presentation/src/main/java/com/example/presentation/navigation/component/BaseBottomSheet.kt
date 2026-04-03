@@ -1,4 +1,4 @@
-package com.example.jetpackcomposelesson.core.component
+package com.example.presentation.navigation.component
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer

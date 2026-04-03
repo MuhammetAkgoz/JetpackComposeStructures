@@ -1,4 +1,4 @@
-package com.example.jetpackcomposelesson.core.menu
+package com.example.presentation.navigation.menu
 
 enum class ScreenName(val value: String) {
     PROFILE("profile ekrani"),
@@ -9,5 +9,6 @@ enum class ScreenName(val value: String) {
     LOCATIONS("konumlar ekrani"),
     BOTTOM_SHEET("bottomsheet widgeti"),
     ALERT_DIALOG("alertdialog widgeti"),
-    DIALOG("dialog widgeti")
+    DIALOG("dialog widgeti"),
+    CHARACTER_DETAIL("karakter detay ekrani")
 }
