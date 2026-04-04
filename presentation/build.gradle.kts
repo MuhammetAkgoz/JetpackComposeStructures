@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.org.jetbrains.kotlin.kapt)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -71,4 +72,8 @@ dependencies {
     kapt(libs.hilt.android.compiler)
     implementation(libs.hilt.android)
     implementation(libs.coil.network.okhttp)
+    implementation(libs.material3.navigation)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(kotlin("reflect"))
 }

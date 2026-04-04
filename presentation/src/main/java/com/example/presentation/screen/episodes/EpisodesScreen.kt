@@ -1,6 +1,7 @@
 package com.example.presentation.screen.episodes
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -47,7 +48,7 @@ fun EpisodesScreen(viewModel: EpisodesViewModel = hiltViewModel()) {
 @Composable
 fun EpisodeContent(state: EpisodesState) {
     ScreenStateBuilder(state = state) {
-        LazyColumn {
+        LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp)) {
             items(state.episodes) {
                 EpisodeCard(it)
             }
@@ -60,9 +61,7 @@ fun EpisodeCard(
     episode: EpisodeModel,
 ) {
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp),
+        modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface,

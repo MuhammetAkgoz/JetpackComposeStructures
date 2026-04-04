@@ -1,4 +1,4 @@
-package com.example.jetpackcomposelesson.core.component
+package com.example.presentation.navigation.component
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -12,10 +12,10 @@ import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.jetpackcomposelesson.core.navigation.destinations.CharactersDestination
-import com.example.jetpackcomposelesson.core.navigation.destinations.NavbarItem
-import com.example.jetpackcomposelesson.core.navigation.destinations.EpisodesDesination
-import com.example.jetpackcomposelesson.core.navigation.destinations.LocationsDestination
+import com.example.presentation.navigation.destinations.CharactersDestination
+import com.example.presentation.navigation.destinations.NavbarItem
+import com.example.presentation.navigation.destinations.EpisodesDesination
+import com.example.presentation.navigation.destinations.LocationsDestination
 
 
 @Composable

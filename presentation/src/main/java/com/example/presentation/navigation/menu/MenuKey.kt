@@ -1,4 +1,4 @@
-package com.example.jetpackcomposelesson.core.menu
+package com.example.presentation.navigation.menu
 
 enum class MenuKey {
     PROFILE,
@@ -9,5 +9,6 @@ enum class MenuKey {
     LOCATIONS,
     BOTTOM_SHEET,
     ALERT_DIALOG,
-    DIALOG
+    DIALOG,
+    CHARACTER_DETAIL
 }

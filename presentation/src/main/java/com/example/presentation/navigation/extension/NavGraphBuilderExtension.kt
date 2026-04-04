@@ -1,4 +1,4 @@
-package com.example.jetpackcomposelesson.core.extension
+package com.example.presentation.navigation.extension
 
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.AnimatedContentTransitionScope
@@ -15,7 +15,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.dialog
 import androidx.navigation.get
 import androidx.navigation.navDeepLink
-import com.example.jetpackcomposelesson.core.menu.BaseDestination
+import com.example.presentation.navigation.menu.BaseDestination
 import com.stefanoq21.material3.navigation.BottomSheetNavigator
 import com.stefanoq21.material3.navigation.BottomSheetNavigatorDestinationBuilder
 import kotlin.reflect.KClass

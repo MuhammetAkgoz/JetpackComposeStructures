@@ -19,10 +19,11 @@ data class CharactersState(
 
 sealed class CharacterEvent : BaseEvent {
     data class LoadData(val page: Int = 1) : CharacterEvent()
-    data class OnCharacterClick(val url: String) : CharacterEvent()
+    data class OnCharacterClick(val character: CharacterModel) : CharacterEvent()
 }
 
 sealed class CharactersEffect : BaseEffect {
     data class ShowToast(val url: String) : CharactersEffect()
     data class ShowErrorDialog(val errorModel: ErrorModel) : CharactersEffect()
+    data class NavigateToDetail(val character: CharacterModel) : CharactersEffect()
 }

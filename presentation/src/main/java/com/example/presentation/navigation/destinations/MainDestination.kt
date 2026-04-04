@@ -1,13 +1,13 @@
-package com.example.jetpackcomposelesson.core.navigation.destinations
+package com.example.presentation.navigation.destinations
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Movie
 import androidx.compose.material.icons.filled.People
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.example.jetpackcomposelesson.core.menu.BaseDestination
-import com.example.jetpackcomposelesson.core.menu.MenuKey
-import com.example.jetpackcomposelesson.core.menu.ScreenName
+import com.example.presentation.navigation.menu.BaseDestination
+import com.example.presentation.navigation.menu.MenuKey
+import com.example.presentation.navigation.menu.ScreenName
 import kotlinx.serialization.Serializable
 
 sealed interface NavbarItem {
@@ -76,4 +76,12 @@ data object AlertDialogDestination : BaseDestination(
 data object DialogDestination : BaseDestination(
     key = MenuKey.DIALOG,
     name = ScreenName.DIALOG
+)
+
+@Serializable
+data class CharacterDetailDestination(
+    val id: Int,
+) : BaseDestination(
+    key = MenuKey.CHARACTER_DETAIL,
+    name = ScreenName.CHARACTER_DETAIL
 )

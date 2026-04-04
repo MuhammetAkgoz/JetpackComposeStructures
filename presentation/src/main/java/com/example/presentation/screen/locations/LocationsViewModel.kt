@@ -7,7 +7,6 @@ import com.example.core.functional.cross
 import com.example.domain.repository.RickAndMortyRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.toImmutableList
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -35,7 +34,6 @@ class LocationsViewModel @Inject constructor(
         viewModelScope.launch {
             repository.getLocations(at).cross(
                 right = { locations ->
-                    delay(3000)
                     val mergedLocations = state.value.locations + locations
 
                     setState {

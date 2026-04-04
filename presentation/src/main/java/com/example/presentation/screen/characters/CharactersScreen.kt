@@ -2,6 +2,7 @@ package com.example.presentation.screen.characters
 
 import android.widget.Toast
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -36,11 +37,9 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
@@ -57,7 +56,8 @@ import kotlin.random.Random
 @Composable
 fun CharactersScreen(
     viewModel: CharactersViewModel = hiltViewModel(),
-    onRegisterScrollToTop: (() -> Unit) -> Unit
+    onRegisterScrollToTop: (() -> Unit) -> Unit,
+    onNavigateToDetail: (CharacterModel) -> Unit
 ) {
     val context = LocalContext.current
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -81,6 +81,10 @@ fun CharactersScreen(
 
                 is CharactersEffect.ShowErrorDialog -> {
                     print(effect.errorModel.message)
+                }
+
+                is CharactersEffect.NavigateToDetail -> {
+                    onNavigateToDetail(effect.character)
                 }
             }
         }
@@ -107,6 +111,7 @@ fun CharactersScreen(
     CharactersContent(
         state = state,
         lazyGridState = lazyStaggeredGridState,
+        onCharacterClick = { viewModel.setEvent(CharacterEvent.OnCharacterClick(it)) }
     )
 }
 
@@ -114,6 +119,7 @@ fun CharactersScreen(
 fun CharactersContent(
     state: CharactersState,
     lazyGridState: LazyStaggeredGridState,
+    onCharacterClick: (CharacterModel) -> Unit,
 ) {
 
     ScreenStateBuilder(
@@ -123,6 +129,7 @@ fun CharactersContent(
         LazyVerticalStaggeredGrid(
             columns = StaggeredGridCells.Fixed(2),
             horizontalArrangement = Arrangement.spacedBy(12.dp),
+            contentPadding = PaddingValues(horizontal = 12.dp),
             verticalItemSpacing = 16.dp,
             state = lazyGridState,
             modifier = Modifier.fillMaxWidth()
@@ -137,7 +144,8 @@ fun CharactersContent(
 
                 CharacterItem(
                     character = character,
-                    randomHeight = randomHeight.dp
+                    randomHeight = randomHeight.dp,
+                    onClick = { onCharacterClick(character) }
                 )
             }
 
@@ -162,7 +170,8 @@ fun CharactersContent(
 @Composable
 fun CharacterItem(
     character: CharacterModel,
-    randomHeight: Dp
+    randomHeight: Dp,
+    onClick: () -> Unit
 ) {
 
     val colorFilter = remember(character.id) {
@@ -182,6 +191,7 @@ fun CharacterItem(
             .height(randomHeight)
             .clip(RoundedCornerShape(16.dp))
             .background(MaterialTheme.colorScheme.surfaceVariant)
+            .clickable{ onClick() }
     ) {
         AsyncImage(
             model = character.image,
@@ -210,9 +220,7 @@ fun CharacterItem(
         Text(
             text = character.name,
             style = MaterialTheme.typography.titleMedium.copy(
-                color = Color.White,
-                fontWeight = FontWeight.Bold,
-                letterSpacing = 0.5.sp
+                color = Color.White
             ),
             maxLines = 2,
             overflow = TextOverflow.Ellipsis,

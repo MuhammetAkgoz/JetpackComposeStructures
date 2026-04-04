@@ -25,7 +25,7 @@ class CharactersViewModel @Inject constructor(
     override fun consume(event: CharacterEvent) {
         when (event) {
             is CharacterEvent.LoadData -> getCharacters(event.page)
-            is CharacterEvent.OnCharacterClick -> setEffect { CharactersEffect.ShowToast(event.url) }
+            is CharacterEvent.OnCharacterClick -> setEffect { CharactersEffect.NavigateToDetail(event.character) }
         }
     }
 
