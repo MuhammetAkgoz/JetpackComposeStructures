@@ -13,7 +13,7 @@ data class CharacterDetailState(
 ) : BaseState
 
 sealed class CharacterDetailEvent : BaseEvent {
-    data class getCharacterById(val id: Int?) : CharacterDetailEvent()
+    data class GetCharacterDetail(val id: Int?) : CharacterDetailEvent()
 }
 
 data object CharacterDetailEffect : BaseEffect

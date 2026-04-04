@@ -24,13 +24,13 @@ class CharacterDetailViewModel @Inject constructor(
 
     init {
         val id = savedStateHandle.toRoute<CharacterDetailDestination>().id;
-        setEvent(CharacterDetailEvent.getCharacterById(id))
+        setEvent(CharacterDetailEvent.GetCharacterDetail(id))
     }
 
 
     override fun consume(event: CharacterDetailEvent) {
         when (event) {
-            is CharacterDetailEvent.getCharacterById -> getCharacter(event.id ?: 0)
+            is CharacterDetailEvent.GetCharacterDetail -> getCharacter(event.id ?: 0)
         }
     }
 
