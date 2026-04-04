@@ -186,7 +186,6 @@ private fun CharacterDetailContent(
                     Text(
                         text = character.name,
                         style = MaterialTheme.typography.displaySmall.copy(
-                            fontWeight = FontWeight.ExtraBold,
                             color = MaterialTheme.colorScheme.onBackground
                         ),
                         textAlign = TextAlign.Start
@@ -237,8 +236,7 @@ private fun DetailInfoRow(label: String, value: String?) {
         )
         Text(
             text = value ?: "-",
-            style = MaterialTheme.typography.bodyLarge.copy(
-                fontWeight = FontWeight.Medium,
+            style = MaterialTheme.typography.titleMedium.copy(
                 color = MaterialTheme.colorScheme.onBackground
             )
         )
