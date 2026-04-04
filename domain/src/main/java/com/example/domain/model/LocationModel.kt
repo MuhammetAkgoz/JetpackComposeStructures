@@ -8,4 +8,5 @@ data class LocationModel(
     val dimension: String? = null,
     val url: String,
     val residents: List<String>? = null,
+    val residentImages: List<String> = emptyList(),
 )

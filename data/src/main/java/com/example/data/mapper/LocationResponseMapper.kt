@@ -17,6 +17,7 @@ class LocationResponseMapper @Inject constructor() :
                 type = it.type.orEmpty(),
                 dimension = it.dimension.orEmpty(),
                 url = it.url.orEmpty(),
+                residents = it.residents?.filterNotNull().orEmpty()
             )
         }
     }

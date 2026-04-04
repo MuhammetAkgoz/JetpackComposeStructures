@@ -43,11 +43,26 @@ class DefaultRickAndMortyRepository @Inject constructor(
     )
 
 
-    override suspend fun getLocations(page: Int): Either<Failure, List<LocationModel>> =
-        safeApiCall(
+    override suspend fun getLocations(page: Int): Either<Failure, List<LocationModel>> {
+        val response = safeApiCall(
             apiCall = { api.getLocations(page) },
             mapper = { locationMapper.map(it) }
         )
+
+        if (response is Either.Right) {
+            val updatedLocations = response.value.map { location ->
+                val first8Residents = location.residents?.take(8) ?: emptyList()
+                val residentImages = first8Residents.map { url ->
+                    val id = url.substringAfterLast("/")
+                    "https://rickandmortyapi.com/api/character/avatar/$id.jpeg"
+                }
+                location.copy(residentImages = residentImages)
+            }
+            return Either.Right(updatedLocations)
+        }
+
+        return response
+    }
 
     override fun getCachedCharacterById(id: Int): Either<Failure, CharacterModel> {
         val character = cachedCharacters[id]
