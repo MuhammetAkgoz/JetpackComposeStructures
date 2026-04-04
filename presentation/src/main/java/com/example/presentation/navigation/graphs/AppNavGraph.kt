@@ -1,7 +1,5 @@
 package com.example.jetpackcomposelesson.core.navigation.graphs
 
-import androidx.compose.animation.AnimatedContentTransitionScope
-import androidx.compose.animation.core.tween
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -26,6 +24,7 @@ import com.example.presentation.navigation.extension.linkedComposable
 import com.example.presentation.navigation.extension.linkedDialog
 import com.example.presentation.navigation.graphs.MainNavGraph
 import com.example.presentation.navigation.menu.BaseDestination
+import com.example.presentation.navigation.transitions.NetflixTransitions
 import com.example.presentation.screen.characterdetail.CharacterDetailScreen
 import com.example.presentation.screen.detail.DetailScreen
 import com.example.presentation.screen.profile.ProfileScreen
@@ -49,30 +48,10 @@ fun AppNavGraph(
         NavHost(
             navController = navController,
             startDestination = startDestination,
-            enterTransition = {
-                slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Start,
-                    tween(400)
-                )
-            },
-            exitTransition = {
-                slideOutOfContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Start,
-                    tween(400)
-                )
-            },
-            popEnterTransition = {
-                slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.End,
-                    tween(400)
-                )
-            },
-            popExitTransition = {
-                slideOutOfContainer(
-                    AnimatedContentTransitionScope.SlideDirection.End,
-                    tween(400)
-                )
-            }
+            enterTransition = NetflixTransitions.enterTransition,
+            exitTransition = NetflixTransitions.exitTransition,
+            popEnterTransition = NetflixTransitions.popEnterTransition,
+            popExitTransition = NetflixTransitions.popExitTransition
         ) {
             linkedComposable<MainDestination> {
                 MainNavGraph(
