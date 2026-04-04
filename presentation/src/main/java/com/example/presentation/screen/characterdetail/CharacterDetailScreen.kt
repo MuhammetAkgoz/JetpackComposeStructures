@@ -46,8 +46,8 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -211,7 +211,7 @@ private fun CharacterDetailContent(
                 DetailInfoRow(label = "Species", value = character.species)
                 DetailInfoRow(label = "Gender", value = character.gender)
                 DetailInfoRow(label = "Location", value = runCatching { character.location.name }.getOrNull())
-                DetailInfoRow(label = "Origin", value = runCatching { character.origin.name }.getOrNull())
+                DetailInfoRow(label = "Origin", value = runCatching { character.origin.name }.getOrNull(), showDivider = false)
 
                 Spacer(modifier = Modifier.height(16.dp))
             }
@@ -220,26 +220,35 @@ private fun CharacterDetailContent(
 }
 
 @Composable
-private fun DetailInfoRow(label: String, value: String?) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 12.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(
-            text = label,
-            style = MaterialTheme.typography.bodyLarge.copy(
-                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
+private fun DetailInfoRow(label: String, value: String?, showDivider: Boolean = true) {
+    Column {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 12.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = label,
+                style = MaterialTheme.typography.bodyLarge.copy(
+                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f)
+                ),
+                modifier = Modifier.padding(end = 16.dp)
             )
-        )
-        Text(
-            text = value ?: "-",
-            style = MaterialTheme.typography.titleMedium.copy(
-                color = MaterialTheme.colorScheme.onBackground
+            Text(
+                text = value ?: "-",
+                style = MaterialTheme.typography.titleMedium.copy(
+                    color = MaterialTheme.colorScheme.onBackground
+                ),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                textAlign = TextAlign.End,
+                modifier = Modifier.weight(1f)
             )
-        )
+        }
+        if (showDivider) {
+            HorizontalDivider(color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.2f))
+        }
     }
-    HorizontalDivider(color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.2f))
 }
